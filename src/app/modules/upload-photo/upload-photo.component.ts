@@ -13,7 +13,10 @@ import {IImage} from '../../core/interfaces/IImage';
   styleUrls: ['./upload-photo.component.scss'],
 })
 export class UploadPhotoComponent implements OnInit, OnDestroy {
-  timeShowingSeverSuccess = 2000; // 2 sec
+  TIME_SHOWING_SERVER_SUCCESS = 2000; // 2 sec
+  STATUS_SERVER_OK = 'ok';
+  STATUS_UPLOADED_PHOTO = 'ok - saved';
+
   nameOfUploadedPhoto = new BehaviorSubject<string>(null);
   nameOfUploadedPhoto$ = this.nameOfUploadedPhoto.asObservable();
 
@@ -41,17 +44,17 @@ export class UploadPhotoComponent implements OnInit, OnDestroy {
   async onCheckStatusServer() {
     const toast = await this.toastController.create({
       message: `Server status: OK`,
-      duration: this.timeShowingSeverSuccess,
+      duration: this.TIME_SHOWING_SERVER_SUCCESS,
       color: 'success'
     });
 
     this.subscriptions.add(this.uploadPhotoService.getStatus().pipe(
       tap((objectWithStatus) => {
-        if (objectWithStatus.status === 'ok') {
+        this.coreService.statusServer = false;
+        if (objectWithStatus.status === this.STATUS_SERVER_OK) {
           this.coreService.statusServer = true;
           toast.present();
         }
-        this.coreService.statusServer = false;
       })
     ).subscribe());
   }
@@ -61,7 +64,7 @@ export class UploadPhotoComponent implements OnInit, OnDestroy {
       const takingPhoto = this.photoService.getPhoto();
       this.subscriptions.add(this.uploadPhotoService.uploadImageToServer(takingPhoto.fileBase64).pipe(
         tap((image: IImage) => {
-          if (image.status === 'ok - saved') {
+          if (image.status === this.STATUS_UPLOADED_PHOTO) {
             this.nameOfUploadedPhoto.next(image.file);
           }
         })

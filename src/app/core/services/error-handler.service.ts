@@ -4,7 +4,7 @@ import {ToastController} from "@ionic/angular";
 
 @Injectable()
 export class ErrorHandlerService {
-  timeShowingTextError = 5000; // 5 sec
+  TIME_SHOWING_TEXT_ERROR = 5000; // 5 sec
 
   constructor(private injector: Injector, public toastController: ToastController) {
   }
@@ -13,7 +13,7 @@ export class ErrorHandlerService {
     const router = this.injector.get(Router);
     const toast = await this.toastController.create({
       message: `Error: ${error.message}`,
-      duration: this.timeShowingTextError,
+      duration: this.TIME_SHOWING_TEXT_ERROR,
       color: 'danger'
     });
 
