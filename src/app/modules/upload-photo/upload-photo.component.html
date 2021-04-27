@@ -1,0 +1,11 @@
+<ion-content [fullscreen]="true">
+  <div id="container">
+    <div *ngIf="!(nameOfUploadedPhoto$ | async); else showPhoto">
+      <ion-button expand="full" (click)="onCheckStatusServer()">Check Server Status</ion-button>
+      <ion-button [disabled]="!isStatusOk()" (click)="takePhoto()" expand="full">Take photo & Upload it</ion-button>
+    </div>
+    <ng-template #showPhoto>
+      <ion-img [src]="getPhoto()"></ion-img>
+    </ng-template>
+  </div>
+</ion-content>

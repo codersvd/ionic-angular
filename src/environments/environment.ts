@@ -3,7 +3,19 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  urls: {
+    getStatusServer: {
+      url: 'api/v1.0/status'
+    },
+    getImage: {
+      url: 'api/v1.0/image/'
+    },
+    uploadPhoto: {
+      url: 'api/v1.0/ranking',
+      auth: true
+    },
+  }
 };
 
 /*
