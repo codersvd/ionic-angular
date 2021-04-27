@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {IQRScannedObject} from '../Interfaces/IQRScannedObject';
+import {IQRScannedObject} from '../core/interfaces/IQRScannedObject';
 
 @Injectable({providedIn: 'root'})
 export class AuthenticationService {
