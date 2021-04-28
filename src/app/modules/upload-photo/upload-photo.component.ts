@@ -13,9 +13,9 @@ import {IImage} from '../../core/interfaces/IImage';
   styleUrls: ['./upload-photo.component.scss'],
 })
 export class UploadPhotoComponent implements OnInit, OnDestroy {
-  TIME_SHOWING_SERVER_SUCCESS = 2000; // 2 sec
-  STATUS_SERVER_OK = 'ok';
-  STATUS_UPLOADED_PHOTO = 'ok - saved';
+  readonly TIME_SHOWING_SERVER_SUCCESS = 2000; // 2 sec
+  readonly STATUS_SERVER_OK = 'ok';
+  readonly STATUS_UPLOADED_PHOTO = 'ok - saved';
 
   nameOfUploadedPhoto = new BehaviorSubject<string>(null);
   nameOfUploadedPhoto$ = this.nameOfUploadedPhoto.asObservable();
